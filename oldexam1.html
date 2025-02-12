@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Old Exams</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h2>Select a Subject</h2>
+    <div id="subjectList">
+        <button class="subject-btn" data-subject="math">Mathematics</button>
+        <button class="subject-btn" data-subject="science">Science</button>
+        <button class="subject-btn" data-subject="history">History</button>
+        <button class="subject-btn" data-subject="english">English</button>
+    </div>
+
+    <script>
+        document.querySelectorAll('.subject-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                let subject = this.getAttribute('data-subject');
+                sessionStorage.setItem('selectedSubject', subject);
+                window.location.href = "subject.html";
+            });
+        });
+    </script>
+
+</body>
+</html>

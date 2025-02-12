@@ -1,0 +1,388 @@
+html {
+    scroll-behavior: smooth;
+}
+
+:root{
+    text-align:center;
+    display:flex;
+    margin:60px;
+    min-height:100vh;
+    background-color: #9bcb9a;
+    font-family:'Times New Roman', Times, serif;
+}
+
+/* Navigation Styles (Unchanged) */
+.navigation{
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%,50%);
+    width:300px;
+    height:100px;
+    background-color:#4b0688;
+    border-radius:10px;
+}
+.navigation ul{
+    display:flex;
+    width:350px;
+    transition: all 0.3s ease;
+}
+.navigation ul li{
+    position:relative;
+    list-style:none;
+    width:70px;
+    height:70px;
+    z-index:1;
+}
+.navigation ul li a{
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:100%;
+    text-align: center;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.navigation ul li a .icon{
+    position:relative;
+    display:block;
+    line-height:75px;
+    font-size: 1.5em;
+    text-align: center;
+    transition:.5s;
+    transition: transform 0.5s ease, color 0.5s ease;
+    color:#fff;
+}
+.navigation ul li.active a .icon{
+    transform: translateY(-60px);
+}
+.navigation ul li a .text{
+    position:absolute;
+    color:#fff;
+    font-weight:400;
+    font-size:0.75rem;
+    letter-spacing:0.05rem;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity:0.3;
+    transform:translateY(22px);
+}
+.navigation ul li.active a .text{
+    opacity:1;
+    transform:translateY(-5px);
+}
+.indicator{
+    position:absolute;
+    top: -50%;
+    width: 60px;
+    height: 60px;
+    background-color: #0097e6;
+    border-radius:50%;
+    border:6px solid #d2dae2;
+    transition: transform 0.5s ease, background-color 0.3s ease;
+}
+
+.indicator::before{
+    content: '';
+    position:absolute;
+    top: 50%;
+    left:-22px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-top-right-radius: 30px;
+    box-shadow:1px -10px 0 0 #d2dae2;
+}
+.indicator::after{
+    content: '';
+    position:absolute;
+    top: 50%;
+    right:-22px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-top-left-radius: 30px;
+    box-shadow:-1px -10px 0 0 #d2dae2;
+}
+.navigation ul li:nth-child(1).active~.indicator{
+    transform: translateX(calc(70px*0));
+}
+.navigation ul li:nth-child(2).active~.indicator{
+    transform: translateX(calc(70px*1));
+}
+.navigation ul li:nth-child(3).active~.indicator{
+    transform: translateX(calc(70px*2));
+}
+@media screen and (max-width: 600px) {
+    .navigation {
+        width: 95vw; /* Wider navigation */
+    }
+
+    .navigation ul li {
+        width: 60px; /* Smaller items */
+    }
+
+    .indicator {
+        width: 40px;
+        height: 40px;
+    }
+}
+body {
+    background: linear-gradient(135deg, #1e1e2e, #3a3a55);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, all 0.3s ease;
+}
+
+.shadow-container {
+    margin-top: 100px; /* Push text below navigation */
+    perspective: 1000px;
+    white-space: nowrap;  
+    width: 100vw; 
+    text-align: center;
+    transition: transform 0.5s ease;
+}
+
+.shadow-text {
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #fff;
+    letter-spacing: 5px;
+    animation: shadowExpand 2s infinite alternate;
+    display: inline-block;
+    transform-style: preserve-3d;
+    position: fixed;
+    top: 20px; /* Distance from the top of the viewport */
+    left: 50%; /* Center the text horizontally */
+    transform: translateX(-50%); /* Adjust for exact centering */
+    transition: text-shadow 0.5s ease;
+}
+
+/* Moves text left to right */
+@keyframes moveText {
+    0% {
+        transform: translateX(-20%);
+    }
+    100% {
+        transform: translateX(30%);
+    }
+}
+@keyframes shadowExpand {
+    0% {
+        text-shadow: 0 0 5px #ff0;
+    }
+    100% {
+        text-shadow: 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0;
+    }
+}
+@media screen and (max-width: 768px) {
+    .shadow-text {
+        font-size: 4vw;
+        letter-spacing: 3px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .shadow-text {
+        font-size: 3.5vw;
+    }
+}
+
+/* Home Section: Text Left, Image Right */
+.home-section {
+    display: flex;
+    align-items: center; /* Vertically center text and image */
+    justify-content: space-between; /* Text on left, image on right */
+    padding: 50px;
+    gap: 60px; /* Space between text and image */
+    max-width: 1080px; /* Max width for layout */
+    width: 100%; /* Responsive width */
+    border-radius: 10px;
+    backdrop-filter: blur(100px); /* Elegant blur effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 255, 0.5); /* Fancy glow shadow */
+    margin: 80px; /* Centering the section */
+    transition: all 0.5s ease;
+}
+
+/* Text Styling */
+.text-content {
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.8;
+    max-width: 500px; /* Restrict text width */
+    text-shadow: 2px 2px 10px rgba(0, 0, 255, 0.5); /* Fancy text glow effect */
+    transition: all 0.3s ease;
+}
+
+/* Image Box */
+.image-box {
+ position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 255, 0.4);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+/* Image Styling */
+.image-box img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    transition: transform 0.4s ease-in-out, filter 0.2s ease-in-out;
+}
+
+/* Hover Effects */
+.image-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 255, 0.6);
+    
+}
+
+.image-box:hover img {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .home-section {
+        flex-direction: column; /* Stack on tablets */
+        text-align: center;
+        padding: 40px;
+    }
+
+    .image-box img {
+        max-width: 350px; /* Smaller image */
+    }
+}
+
+@media (max-width: 768px) {
+    .home-section {
+        flex-direction: column; /* Stack on mobile */
+        text-align: center;
+        padding: 30px;
+    }
+
+    .image-box img {
+        max-width: 300px; /* Smaller image */
+    }
+}
+
+/* Main Container for Video and Text */
+.image-college {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Space between video and text */
+    margin: 50px 0;
+    padding: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #f8f8f8;
+}
+
+/* Video Container */
+.video-container {
+    max-width: 500px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Video Styling */
+.college-video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover; /* Ensures the video covers the container without stretching */
+}
+
+/* Text Container */
+.text-container {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Text Styling */
+.text-container h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #4b0688; /* Deep purple color */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .image-college {
+        flex-direction: column; /* Stack the video and text on smaller screens */
+        text-align: center;
+    }
+
+    .college-video {
+        max-width: 100%; /* Make the video fill its container on smaller screens */
+    }
+
+    .text-container h2 {
+        font-size: 28px; /* Adjust text size for smaller screens */
+    }
+}
+
+/* Image Container */
+.image-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    flex-wrap: wrap;  /* Make sure images wrap on smaller screens */
+}
+
+/* Image Styling */
+.clickable-image {
+    width: 100%;  /* Make images responsive */
+    max-width: 200px; /* Maximum width */
+    height: auto;
+    cursor: pointer; /* Cursor as pointer on hover */
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+/* Hover Effect */
+.clickable-image:hover {
+    transform: scale(1.1);  /* Slight zoom effect on hover */
+}
+
+/* Login Block */
+.login-block {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+.role-btn, .close-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+#errorMsg {
+    color: red;
+}
